@@ -106,3 +106,50 @@ encrypted_data=entagle(data)
 print( encrypted\_data) 
 
 
+//// 
+import cv2
+
+
+def create_pixel_attack(image_path):
+    # Load the image from disk 📸
+
+    img = cv2.imread(image_path)
+
+
+    if img is None:
+        print("Error loading image")
+        return 
+
+
+    # Create a blank 10x10 pixel grid
+    pixels = np.zeros((10, 10), dtype=np.uint8 )
+
+
+    
+    for i in range(0, len(img[1]), 5):
+        
+            row = []
+            
+                for j in range(len(img)):
+                    
+                    if (j % 2 == 0 and img[j][i] > 128) or (
+                            j % 2 != 0 and img[j][i] < 128
+                        ):
+                        
+                         pixel_value = int(np.random.randint(1,256))
+                        row.append(pixel\_value)
+                    else:
+                        row.append(img[j][i])
+
+
+                pixels[i // 5] = np.array(row)
+
+
+    return pixels
+
+
+# Run the pixel attack (at your own risk) 
+
+
+
+
